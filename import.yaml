@@ -3,46 +3,18 @@ kind: Template
 metadata:
   name: any
 labels:
-  template: alain-nguyen
+  template: any
 objects:
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: postgresql
-    namespace: poc-cognos-report
-    finalizers:
-      - kubernetes.io/pvc-protection
-  spec:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
 - apiVersion: v1
   kind: Secret
   metadata:
     name: postgresql-secret
-    namespace: nguyenalain-fr
+    namespace: ${NAMESPACE}
   data:
     database-name: ZGItc2Fub2Zp
     database-password: cDQ1NXcwcmQ=
     database-user: dXNlci1zYW5vZmk=
   type: Opaque
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-    labels:
-    name: quotesapi
-    namespace: nguyenalain-fr
-  spec:
-    ports:
-      - name: postgresql
-        protocol: TCP
-        port: 5432
-        targetPort: 5432
-    selector:
-      name: postgresql
 parameters:
 - description: Name
   displayName: Name
