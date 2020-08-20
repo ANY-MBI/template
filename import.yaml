@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: alain-nguyen
+  template: postgresql-template
 metadata:
   name: tpl-postgresql
   namespace: ${NAMESPACE}
