@@ -1,22 +1,45 @@
 apiVersion: template.openshift.io/v1
 kind: Template
+labels:
+  template: alain-nguyen
 metadata:
   name: any
-labels:
-  template: any
+  namespace: nguyenalain-fr
 objects:
 - apiVersion: v1
-  kind: Secret
-  metadata:
-    name: postgresql-secret
-    namespace: ${NAMESPACE}
   data:
     database-name: ZGItc2Fub2Zp
     database-password: cDQ1NXcwcmQ=
     database-user: dXNlci1zYW5vZmk=
+  kind: Secret
+  metadata:
+    name: postgresql-secret
+    namespace: nguyenalain-fr
   type: Opaque
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations: null
+    labels: null
+    name: postgresql-svc
+    namespace: nguyenalain-fr
+  spec:
+    ports:
+    - name: postgresql
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      name: postgresql
 parameters:
 - description: Name
   displayName: Name
   name: NAMESPACE
   required: true
+- description: DisplayName
+  displayName: DisplayName
+  name: NAMESPACE_DISPLAY_NAME
+  required: true
+- description: Description
+  displayName: Description
+  name: NAMESPACE_DESCRIPTION
