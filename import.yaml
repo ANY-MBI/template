@@ -7,14 +7,14 @@ metadata:
   namespace: nguyenalain-fr
 objects:
 - apiVersion: v1
-  data:
-    database-name: ZGItc2Fub2Zp
-    database-password: cDQ1NXcwcmQ=
-    database-user: dXNlci1zYW5vZmk=
   kind: Secret
   metadata:
     name: postgresql-secret
     namespace: nguyenalain-fr
+  data:
+    database-name: ZGItc2Fub2Zp
+    database-password: cDQ1NXcwcmQ=
+    database-user: dXNlci1zYW5vZmk=
   type: Opaque
 - apiVersion: v1
   kind: Service
