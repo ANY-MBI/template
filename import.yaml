@@ -61,7 +61,8 @@ objects:
             persistentVolumeClaim:
               claimName: postgresql-pvc
         containers:
-          - resources:
+          - name: postgresql
+            resources:
               limits:
                 memory: 512Mi
             readinessProbe:
