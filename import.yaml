@@ -6,6 +6,19 @@ labels:
   template: alain-nguyen
 objects:
 - apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: postgresql
+    namespace: poc-cognos-report
+    finalizers:
+      - kubernetes.io/pvc-protection
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+- apiVersion: v1
   kind: Secret
   metadata:
     name: postgresql-secret
@@ -35,10 +48,3 @@ parameters:
   displayName: Name
   name: NAMESPACE
   required: true
-- description: DisplayName
-  displayName: DisplayName
-  name: NAMESPACE_DISPLAY_NAME
-  required: true
-- description: Description
-  displayName: Description
-  name: NAMESPACE_DESCRIPTION
