@@ -3,14 +3,14 @@ kind: Template
 labels:
   template: alain-nguyen
 metadata:
-  name: any
-  namespace: nguyenalain-fr
+  name: tpl-postgresql
+  namespace: ${NAMESPACE}
 objects:
 - apiVersion: v1
   kind: Secret
   metadata:
     name: postgresql-secret
-    namespace: nguyenalain-fr
+    namespace: ${NAMESPACE}
   data:
     database-name: ZGItc2Fub2Zp
     database-password: cDQ1NXcwcmQ=
@@ -22,7 +22,7 @@ objects:
     annotations: null
     labels: null
     name: postgresql-svc
-    namespace: nguyenalain-fr
+    namespace: ${NAMESPACE}
   spec:
     ports:
     - name: postgresql
@@ -31,15 +31,26 @@ objects:
       targetPort: 5432
     selector:
       name: postgresql
+- apiVersion: v1 
+  kind: PersistentVolumeClaim
+  metadata:
+    name: postgresql-pvc
+    namespace: ${NAMESPACE}
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 50Mi
 parameters:
-- description: Name
+- description: Value for namespace
   displayName: Name
   name: NAMESPACE
   required: true
-- description: DisplayName
-  displayName: DisplayName
+- description: Value for displayname
+  displayName: Display Name
   name: NAMESPACE_DISPLAY_NAME
   required: true
-- description: Description
+- description: Text
   displayName: Description
   name: NAMESPACE_DESCRIPTION
